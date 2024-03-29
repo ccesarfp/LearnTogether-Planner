@@ -15,7 +15,7 @@
         @viteReactRefresh
         @viteReactRefresh
         @viteReactRefresh
-        @vite(['resources/js/app.jsx'])
+        @vite(['resources/js/index.jsx'])
     </head>
     <body>
         <div id="root">
