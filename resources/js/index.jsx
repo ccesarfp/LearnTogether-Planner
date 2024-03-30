@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom/client';
-import Home from './pages/Home';
+import { RouterProvider } from 'react-router-dom';
 import GlobalStyle from './global.js';
-import { BrowserRouter } from 'react-router-dom';
+import routes from './routes.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter>
+    <>
         <GlobalStyle />
-        <Home />
-    </BrowserRouter>
+        <RouterProvider router={routes} />
+    </>
 );
