@@ -3,22 +3,26 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "babel": "babel src -d build"
     },
     "devDependencies": {
-        "@popperjs/core": "^2.11.6",
+        "@babel/core": "^7.24.3",
+        "@babel/preset-env": "^7.24.3",
+        "@babel/preset-react": "^7.24.1",
         "@vitejs/plugin-react": "^4.2.0",
         "autoprefixer": "^10.4.19",
         "axios": "^1.6.4",
-        "bootstrap": "^5.2.3",
+        "eslint": "^8.57.0",
+        "eslint-plugin-react": "^7.34.1",
+        "eslint-plugin-react-hooks": "^4.6.0",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.38",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "sass": "^1.56.1",
-        "tailwindcss": "^3.4.3",
         "styled-components": "^6.1.8",
+        "tailwindcss": "^3.4.3",
         "vite": "^5.0"
-    },
-    "dependencies": {}
+    }
 }
