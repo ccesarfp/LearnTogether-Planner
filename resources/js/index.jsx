@@ -1,9 +1,13 @@
 import React from "react";
 import ReactDOM from 'react-dom/client';
-import Main from './components/main/index.jsx';
+import Home from './pages/Home';
+import GlobalStyle from './global.js';
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <Main>
-    </Main>
+    <BrowserRouter>
+        <GlobalStyle />
+        <Home />
+    </BrowserRouter>
 );
