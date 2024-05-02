@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Home } from "./pages/Home";
+import { SingUp } from "./pages/SingUp";
 
 const router = createBrowserRouter([
     {
@@ -8,6 +9,10 @@ const router = createBrowserRouter([
         children: [
             {}
         ]
+    },
+    {
+        path: "/sing-up",
+        element: <SingUp />
     }
 ]);
 
