@@ -7,6 +7,6 @@ use App\Http\Requests\RegisterRequest;
 class AuthService {
     public function register(RegisterRequest $request): void
     {
-        
+        dd($request);
     }
 }
