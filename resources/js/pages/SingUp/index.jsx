@@ -1,12 +1,11 @@
-import { Center, Box } from '@mantine/core';
-import { useViewportSize } from '@mantine/hooks';
-import { useForm } from '@mantine/form';
 import { TextInput, Button, Group } from '@mantine/core';
+import { useForm } from '@mantine/form';
 import { yupResolver } from 'mantine-form-yup-resolver';
 import * as yup from 'yup';
+import { GoBack } from '../../components/form/GoBack/index.jsx';
+import { Filled } from '../../components/layout/Filled';
 
 export function SingUp() {
-    const { height, width } = useViewportSize();
     const schema = yup.object().shape({
         name: yup.string()
                     .required('Nome é obrigatório'),
@@ -33,63 +32,55 @@ export function SingUp() {
     });
 
     return (
-        <Center
-            h={height}
-            w={width}
-            bg="red.5"
-        >
-            <Box
-                w={400}
-                bg="red.3"
-                p={20}
-            >
-                <TextInput
-                    label="Nome"
-                    placeholder="Nome"
-                    size="md"
-                    mb="xs"
-                    key={form.key('name')}
-                    {...form.getInputProps('name')}
-                />
-                <TextInput
-                    label="E-Mail"
-                    placeholder="E-mail"
-                    size="md"
-                    mb="xs"
-                    key={form.key('email')}
-                    {...form.getInputProps('email')}
+        <Filled>
+            <GoBack />
 
-                />
-                <TextInput
-                    label="Senha"
-                    placeholder="Senha"
-                    size="md"
-                    mb="xs"
-                    key={form.key('password')}
-                    {...form.getInputProps('password')}
+            <TextInput
+                label="Nome"
+                placeholder="Nome"
+                size="md"
+                mb="xs"
+                key={form.key('name')}
+                {...form.getInputProps('name')}
+            />
+            <TextInput
+                label="E-Mail"
+                placeholder="E-mail"
+                size="md"
+                mb="xs"
+                key={form.key('email')}
+                {...form.getInputProps('email')}
 
-                />
-                <TextInput
-                    label="Confirmar Senha"
-                    placeholder="Confirmar Senha"
-                    size="md"
-                    mb="xs"
-                    key={form.key('confirmPassword')}
-                    {...form.getInputProps('confirmPassword')}
+            />
+            <TextInput
+                label="Senha"
+                placeholder="Senha"
+                size="md"
+                mb="xs"
+                key={form.key('password')}
+                {...form.getInputProps('password')}
 
-                />
+            />
+            <TextInput
+                label="Confirmar Senha"
+                placeholder="Confirmar Senha"
+                size="md"
+                mb="xs"
+                key={form.key('confirmPassword')}
+                {...form.getInputProps('confirmPassword')}
 
-                <Group justify="center" mt="xl">
-                    <Button
-                        onClick={() => {
-                            form.validate();
-                            console.log(form.getValues());
-                        }}
-                    >
-                        Cadastrar
-                    </Button>
-                </Group>
-            </Box>
-        </Center>
+            />
+
+            <Group justify="center" mt="xl">
+                <Button
+                    onClick={() => {
+                        form.validate();
+                        console.log(form.getValues());
+                    }}
+                >
+                    Cadastrar
+                </Button>
+            </Group>
+        </ Filled>
     )
 }
