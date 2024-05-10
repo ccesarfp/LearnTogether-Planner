@@ -1,9 +1,11 @@
-import { TextInput, Button, Group } from '@mantine/core';
+import { TextInput, PasswordInput, Button, Group } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { yupResolver } from 'mantine-form-yup-resolver';
 import * as yup from 'yup';
 import { GoBack } from '../../components/form/GoBack/index.jsx';
 import { Filled } from '../../components/layout/Filled';
+import axios from 'axios';
+import { encrypt } from '../../utils/PasswordEncrypt.js';
 
 export function SingUp() {
     const schema = yup.object().shape({
@@ -30,6 +32,33 @@ export function SingUp() {
         },
         validate: yupResolver(schema)
     });
+    let password = '';
+    let confirmPassword = '';
+    const handleForm = async () => {
+        form.validate();
+        let values = form.getValues();
+
+        await Promise.all([
+            encrypt(values.password),
+            encrypt(values.confirmPassword),
+        ]).then((result) => {
+            password = result[0];
+            confirmPassword = result[1];
+        });
+
+        if(form.validate().hasErrors === false) {
+            axios.post('/api/register',
+                {
+                    'name': values.name,
+                    'email': values.email,
+                    'password': password,
+                    'password_confirmation': confirmPassword,
+                })
+                .then(response => {
+                    console.log(response);
+                });
+        }
+    }
 
     return (
         <Filled>
@@ -52,7 +81,7 @@ export function SingUp() {
                 {...form.getInputProps('email')}
 
             />
-            <TextInput
+            <PasswordInput
                 label="Senha"
                 placeholder="Senha"
                 size="md"
@@ -61,7 +90,7 @@ export function SingUp() {
                 {...form.getInputProps('password')}
 
             />
-            <TextInput
+            <PasswordInput
                 label="Confirmar Senha"
                 placeholder="Confirmar Senha"
                 size="md"
@@ -73,10 +102,7 @@ export function SingUp() {
 
             <Group justify="center" mt="xl">
                 <Button
-                    onClick={() => {
-                        form.validate();
-                        console.log(form.getValues());
-                    }}
+                    onClick={handleForm}
                 >
                     Cadastrar
                 </Button>

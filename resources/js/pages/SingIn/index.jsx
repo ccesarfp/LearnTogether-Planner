@@ -1,4 +1,4 @@
-import { TextInput, Button, Group } from '@mantine/core';
+import { TextInput, PasswordInput, Button, Group } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { yupResolver } from 'mantine-form-yup-resolver';
 import * as yup from 'yup';
@@ -35,7 +35,7 @@ export function SingIn() {
                 {...form.getInputProps('email')}
 
             />
-            <TextInput
+            <PasswordInput
                 label="Senha"
                 placeholder="Senha"
                 size="md"

@@ -2,11 +2,16 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Http\Requests\RegisterRequest;
 
 class AuthService {
-    public function register(RegisterRequest $request): void
+    public function register(array $user): void
     {
-        dd($request);
+        dd($user);
+
+        (new \App\Models\User)->create([
+            "name" => $user["name"],
+            "email" => $user["email"],
+            "password" => $user["password"],
+        ]);
     }
 }

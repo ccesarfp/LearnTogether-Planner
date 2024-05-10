@@ -48,7 +48,7 @@
         "@mantine/modals": "^7.9.0",
         "@mantine/notifications": "^7.9.0",
         "@mantine/nprogress": "^7.9.0",
-        "crypto-js": "^4.2.0",
+        "bcryptjs": "^2.4.3",
         "dayjs": "^1.11.11",
         "i": "^0.3.7",
         "mantine-form-yup-resolver": "^2.0.0",
