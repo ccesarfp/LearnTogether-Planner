@@ -4,8 +4,13 @@ import { yupResolver } from 'mantine-form-yup-resolver';
 import * as yup from 'yup';
 import { GoBack } from "../../components/form/GoBack"
 import { Filled } from '../../components/layout/Filled/index.jsx';
+import { encrypt } from '../../utils/PasswordEncrypt.js';
+import axios from 'axios';
+import { redirect, useNavigate } from 'react-router-dom';
+import { setCookie } from '../../utils/Cookies.js';
 
 export function SingIn() {
+    const navigate = useNavigate();
     const schema = yup.object().shape({
         email: yup.string()
                     .email('Não é um email')
@@ -14,13 +19,37 @@ export function SingIn() {
                         .required('Senha é obrigatória'),
     });
     const form = useForm({
-        mode: 'uncontrolled',
         initialValues: {
             email: '',
             password: '',
         },
         validate: yupResolver(schema)
     });
+    let password = '';
+    const handleForm = async () => {
+        form.validate();
+        let values = form.getValues();
+
+        await Promise.all([
+            encrypt(values.password),
+        ]).then((result) => {
+            password = result[0];
+        });
+
+        if(form.validate().hasErrors === false) {
+            axios.post('/api/login',
+                {
+                    'email': values.email,
+                    'password': password,
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        setCookie("token", response.data.token);
+                        navigate('/tasks');
+                    }
+                });
+        }
+    }
 
     return (
         <Filled>
@@ -32,27 +61,25 @@ export function SingIn() {
                 size="md"
                 mb="xs"
                 key={form.key('email')}
-                {...form.getInputProps('email')}
-
+                value={form.values.email}
+                onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
             />
+
             <PasswordInput
                 label="Senha"
                 placeholder="Senha"
                 size="md"
                 mb="xs"
                 key={form.key('password')}
-                {...form.getInputProps('password')}
-
+                value={form.values.password}
+                onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
             />
 
             <Group justify="center" mt="xl">
                 <Button
                     color="pink"
                     variant="outline"
-                    onClick={() => {
-                        form.validate();
-                        console.log(form.getValues());
-                    }}
+                    onClick={handleForm}
                 >
                     Entrar
                 </Button>

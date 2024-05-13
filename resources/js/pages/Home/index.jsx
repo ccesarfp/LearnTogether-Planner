@@ -6,7 +6,9 @@ export function Home() {
     const color = "pink";
 
     return (
-        <Filled>
+        <Filled
+            breakLine={true}
+        >
             <Link
                 href="/sing-up"
                 color={color}

@@ -1,7 +1,7 @@
 import { Center, Box } from "@mantine/core";
 import { useViewportSize } from '@mantine/hooks';
 
-export function Filled({ children }) {
+export function Filled({ breakLine = false, children }) {
     const { height, width } = useViewportSize();
 
     return (
@@ -14,7 +14,7 @@ export function Filled({ children }) {
                 w={400}
                 bg="red.3"
                 p={20}
-                //style={{ display: 'flex', placeContent: 'center '}}
+                style={breakLine ? { display: 'flex', placeContent: 'center' } : ''}
             >
                 {children}
             </Box>

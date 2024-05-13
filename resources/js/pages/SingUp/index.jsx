@@ -6,8 +6,11 @@ import { GoBack } from '../../components/form/GoBack/index.jsx';
 import { Filled } from '../../components/layout/Filled';
 import axios from 'axios';
 import { encrypt } from '../../utils/PasswordEncrypt.js';
+import { redirect, useNavigate } from 'react-router-dom';
+import { setCookie } from '../../utils/Cookies.js';
 
 export function SingUp() {
+    const navigate = useNavigate();
     const schema = yup.object().shape({
         name: yup.string()
                     .required('Nome é obrigatório'),
@@ -23,7 +26,6 @@ export function SingUp() {
                         .required('Senha é obrigatória'),
     });
     const form = useForm({
-        mode: 'uncontrolled',
         initialValues: {
             name: '',
             email: '',
@@ -55,7 +57,10 @@ export function SingUp() {
                     'password_confirmation': confirmPassword,
                 })
                 .then(response => {
-                    console.log(response);
+                    if (response.status === 200) {
+                        setCookie("token", response.data.token);
+                        navigate('/tasks');
+                    }
                 });
         }
     }
@@ -70,15 +75,16 @@ export function SingUp() {
                 size="md"
                 mb="xs"
                 key={form.key('name')}
-                {...form.getInputProps('name')}
+                value={form.values.name}
+                onChange={(event) => form.setFieldValue('name', event.currentTarget.value)}
             />
             <TextInput
                 label="E-Mail"
                 placeholder="E-mail"
                 size="md"
                 mb="xs"
-                key={form.key('email')}
-                {...form.getInputProps('email')}
+                value={form.values.email}
+                onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
 
             />
             <PasswordInput
@@ -86,8 +92,8 @@ export function SingUp() {
                 placeholder="Senha"
                 size="md"
                 mb="xs"
-                key={form.key('password')}
-                {...form.getInputProps('password')}
+                value={form.values.password}
+                onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
 
             />
             <PasswordInput
@@ -95,13 +101,15 @@ export function SingUp() {
                 placeholder="Confirmar Senha"
                 size="md"
                 mb="xs"
-                key={form.key('confirmPassword')}
-                {...form.getInputProps('confirmPassword')}
+                value={form.values.confirmPassword}
+                onChange={(event) => form.setFieldValue('confirmPassword', event.currentTarget.value)}
 
             />
 
             <Group justify="center" mt="xl">
                 <Button
+                    color="pink"
+                    variant="outline"
                     onClick={handleForm}
                 >
                     Cadastrar
