@@ -2,14 +2,20 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
+use \Illuminate\Contracts\Auth\Authenticatable;
 
-class User extends Authenticatable
+/**
+ * User
+ *
+ * @mixin Builder
+ */
+class User extends Model implements Authenticatable, \Countable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -43,5 +49,45 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getAuthIdentifierName()
+    {
+        // TODO: Implement getAuthIdentifierName() method.
+    }
+
+    public function getAuthIdentifier()
+    {
+        // TODO: Implement getAuthIdentifier() method.
+    }
+
+    public function getAuthPasswordName()
+    {
+        // TODO: Implement getAuthPasswordName() method.
+    }
+
+    public function getAuthPassword()
+    {
+        // TODO: Implement getAuthPassword() method.
+    }
+
+    public function getRememberToken()
+    {
+        // TODO: Implement getRememberToken() method.
+    }
+
+    public function setRememberToken($value)
+    {
+        // TODO: Implement setRememberToken() method.
+    }
+
+    public function getRememberTokenName()
+    {
+        // TODO: Implement getRememberTokenName() method.
+    }
+
+    public function count(): int
+    {
+        return $this->count();
     }
 }
