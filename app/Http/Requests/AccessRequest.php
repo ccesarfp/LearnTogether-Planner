@@ -22,7 +22,7 @@ class AccessRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'token' => ['required', 'string']
         ];
     }
 }

@@ -22,7 +22,7 @@ class AuthService {
         ])              ->firstOrFail();
     }
 
-        public function checkPassword($password, $hashedPassword): bool
+    public function checkPassword($password, $hashedPassword): bool
     {
         return Hash::check($password, $hashedPassword);
     }
