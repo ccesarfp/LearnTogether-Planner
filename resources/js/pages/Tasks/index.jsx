@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getCookie } from '../../utils/Cookies.js';
 import { useNavigate } from 'react-router-dom';
+import { Index } from '../../components/task/Task/index.jsx';
 
 export function Tasks() {
     let token = getCookie('token');
@@ -16,9 +17,7 @@ export function Tasks() {
             }
         }).then((response) => {
             setTasks(response.data.tasks.map(task =>
-                <div key={task.id} className={ 'task' }>
-                    {task.title} {task.due_date ? ' - ' + task.due_date : ''}
-                </div>
+                <Index key={task.id} task={task} />
             ));
         }).catch((reason) => {
             if (reason.response.status === 401) {
