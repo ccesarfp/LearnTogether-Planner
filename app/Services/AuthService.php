@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\NewAccessToken;
+use Laravel\Sanctum\Sanctum;
 
 class AuthService {
     public function register(array $userData): User

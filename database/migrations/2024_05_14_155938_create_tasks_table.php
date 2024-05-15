@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('title');
-            $table->string('description');
-            $table->timestamp('due_date');
+            $table->longText('description')->nullable();
+            $table->timestamp('due_date')->nullable();
             $table->enum('status', ['todo', 'doing', 'done']);
             $table->timestamps();
 
