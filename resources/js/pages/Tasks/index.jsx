@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getCookie } from '../../utils/Cookies.js';
 import { useNavigate } from 'react-router-dom';
-import { Index } from '../../components/task/Task/index.jsx';
+import { Task } from '../../components/task/Task';
+import { TaskList } from '../../components/task/TaskList/index.jsx';
 
 export function Tasks() {
     let token = getCookie('token');
@@ -16,9 +17,7 @@ export function Tasks() {
                 Accept: 'application/json',
             }
         }).then((response) => {
-            setTasks(response.data.tasks.map(task =>
-                <Index key={task.id} task={task} />
-            ));
+            setTasks(response.data.tasks);
         }).catch((reason) => {
             if (reason.response.status === 401) {
                 navigate('/sing-in');
@@ -34,7 +33,7 @@ export function Tasks() {
         <div>
             <h1>Tasks</h1>
             <div>
-                {tasks}
+                {tasks && <TaskList tasks={tasks} />}
             </div>
         </div>
     )
