@@ -1,4 +1,4 @@
-import { TextInput, PasswordInput, Button, Group } from '@mantine/core';
+import { TextInput, PasswordInput, Button, Group, useMantineTheme } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { yupResolver } from 'mantine-form-yup-resolver';
 import * as yup from 'yup';
@@ -6,10 +6,11 @@ import { GoBack } from "../../components/form/GoBack"
 import { Filled } from '../../components/layout/Filled/index.jsx';
 import { encrypt } from '../../utils/PasswordEncrypt.js';
 import axios from 'axios';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setCookie } from '../../utils/Cookies.js';
 
 export function SingIn() {
+    const theme = useMantineTheme();
     const navigate = useNavigate();
     const schema = yup.object().shape({
         email: yup.string()
@@ -77,7 +78,7 @@ export function SingIn() {
 
             <Group justify="center" mt="xl">
                 <Button
-                    color="pink"
+                    color={theme.colors.dark[7]}
                     variant="outline"
                     onClick={handleForm}
                 >

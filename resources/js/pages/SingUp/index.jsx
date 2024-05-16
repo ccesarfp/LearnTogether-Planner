@@ -108,7 +108,7 @@ export function SingUp() {
 
             <Group justify="center" mt="xl">
                 <Button
-                    color="pink"
+                    color="dark.7"
                     variant="outline"
                     onClick={handleForm}
                 >

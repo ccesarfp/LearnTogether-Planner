@@ -7,8 +7,8 @@ export const TaskBoard = styled.div`
     width: 45vw;
     max-height: 60vh;
 
-    border: 1px solid black;
+    border: 1px solid #A61E4D;
     border-radius: 5px;
 
-    background: #4a5568;
+    background: #495057;
 `;

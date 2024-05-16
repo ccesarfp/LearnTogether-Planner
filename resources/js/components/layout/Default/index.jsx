@@ -1,5 +1,6 @@
 import { Header } from '../../header/Header';
 import { Main } from '../../content/Main'
+import { Footer } from '../../footer/Footer';
 
 export function Default({ children }) {
     return (
@@ -8,6 +9,7 @@ export function Default({ children }) {
             <Main>
                 { children }
             </Main>
+            <Footer />
         </>
     )
 }

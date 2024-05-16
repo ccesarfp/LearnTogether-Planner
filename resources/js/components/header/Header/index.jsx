@@ -1,11 +1,11 @@
-import { Container } from './styles.js';
-import Title from '../Title/index.jsx';
+import { Container, H1 } from './styles.js';
 
 export function Header() {
     return (
         <Container>
-            <Title>
-            </Title>
+            <H1>
+                LearnTogether
+            </H1>
         </Container>
     )
 }

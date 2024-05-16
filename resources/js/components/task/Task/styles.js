@@ -6,4 +6,17 @@ export const TaskBefore = styled.div`
         margin-right: 10px;
         font-size: 1.1em;
     }
+
+    & {
+        color: #141414;
+        padding: 5px;
+        border-radius: 5px;
+        transition: transform .2s;
+    }
+
+    &:hover {
+        background: pink;
+        transform: scale(1.03);
+        font-weight: bold;
+    }
 `;
