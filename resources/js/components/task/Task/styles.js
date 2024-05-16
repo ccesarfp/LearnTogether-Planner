@@ -15,7 +15,7 @@ export const TaskBefore = styled.div`
     }
 
     &:hover {
-        background: pink;
+        background: rgba(240, 101, 149, 0.6);
         transform: scale(1.03);
         font-weight: bold;
     }
