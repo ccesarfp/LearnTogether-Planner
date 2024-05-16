@@ -1,8 +1,9 @@
-import { TaskList } from '../TaskList/index.jsx';
+import { List } from '../List/index.jsx';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import './style.css';
+import { TaskBoard } from './styles.js';
+
 export function Board({ token    }) {
     const navigate = useNavigate();
     const [tasks, setTasks] = useState(null);
@@ -27,8 +28,8 @@ export function Board({ token    }) {
     }, []);
 
     return (
-        <div id='task-board'>
-            {tasks && <TaskList tasks={tasks} />}
-        </div>
+        <TaskBoard>
+            {tasks && <List tasks={tasks} />}
+        </TaskBoard>
     )
 }
