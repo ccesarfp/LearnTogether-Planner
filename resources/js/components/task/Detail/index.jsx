@@ -1,9 +1,11 @@
 import { Container, Box } from './styles.js';
+import './styles.css';
 import { TextInput, Select, Grid, Textarea, Button, Group } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { yupResolver } from 'mantine-form-yup-resolver';
 import * as yup from 'yup';
+import { useState } from 'react';
 
 export function Detail() {
     const options = [
@@ -21,10 +23,11 @@ export function Detail() {
         },
     ]
     const schema = yup.object().shape({
-        title: yup.string().required('Título é obrigatório'),
+        title: yup.string()
+            .min(3, 'É necessário ter ao menos 3 letras')
+            .required('Título é obrigatório'),
         description: yup.string(),
-        dueDate: yup.date(),
-        status: yup.string().required('Status é obrigatória'),
+        status: yup.string().required('Status é obrigatório'),
     });
     const form = useForm({
         initialValues: {
@@ -35,27 +38,46 @@ export function Detail() {
         },
         validate: yupResolver(schema)
     });
+    const [titleError, setTitleError] = useState(null);
+    const [statusError, setStatusError] = useState(null);
+
+    const handleForm = () => {
+        form.validate();
+        let values = form.getValues();
+
+        if(form.validate().hasErrors) {
+            form.validate().errors.title ? setTitleError(form.validate().errors.title) : '';
+            form.validate().errors.status ? setStatusError(form.validate().errors.status) : '';
+            return false;
+        }
+
+        
+    }
 
     return (
         <Container>
             <Box>
                 <Grid>
-                    <Grid.Col span={7}>
+                    <Grid.Col span={8}>
                         <TextInput
                             label="Título"
                             placeholder="Título da Atividade"
-                            size="md"
+                            error={titleError}
+                            className={{label:'label'}}
+                            size="sm"
                             mb="xs"
                             key={form.key('title')}
                             value={form.values.title}
                             onChange={(event) => form.setFieldValue('title', event.currentTarget.value)}
                         />
                     </Grid.Col>
-                    <Grid.Col span={5}>
+                    <Grid.Col span={4}>
                         <Select
                             label="Status"
                             placeholder="Status"
-                            size="md"
+                            error={statusError}
+                            className={{label:'label'}}
+                            size="sm"
                             mb="xs"
                             data={options}
                             key={form.key('status')}
@@ -70,7 +92,8 @@ export function Detail() {
                         <Textarea
                             label="Descrição"
                             placeholder="Descrição da Atividade"
-                            size="md"
+                            className={{label:'label'}}
+                            size="sm"
                             autosize
                             minRows={2}
                             maxRows={6}
@@ -87,6 +110,7 @@ export function Detail() {
                         <DateInput
                             label="Data de Conclusão"
                             placeholder="Data de Conclusão"
+                            className={{label:'label'}}
                             size="sm"
                             mb="xs"
                             valueFormat="DD/MM/YYYY"
@@ -102,8 +126,9 @@ export function Detail() {
                         color="pink.6"
                         variant="outline"
                         size={'md'}
+                        onClick={handleForm}
                     >
-                        Cadastrar
+                        Criar Atividade
                     </Button>
                 </Group>
             </Box>
