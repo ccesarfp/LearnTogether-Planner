@@ -19,7 +19,7 @@ export function Tasks() {
             </Delimiter>
 
             <Delimiter style={{ float: 'right' }}>
-                <Add />
+                <Add token={token} />
             </Delimiter>
         </Default>
     )

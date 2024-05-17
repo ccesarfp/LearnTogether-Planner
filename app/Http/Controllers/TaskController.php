@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\CreateTaskRequest;
+use App\Models\Task;
 use App\Models\User;
 use App\Services\TaskService;
 use Illuminate\Http\Request;
@@ -22,8 +23,13 @@ class TaskController
             ]);
     }
 
-    public function store(CreateTaskRequest $request, TaskService $taskService) {
-        dd($request);
+    public function store(CreateTaskRequest $request, TaskService $taskService): Response {
+        $taskService->store(['user_id' => Auth::user()->id] + $request->validated());
+        return response('Task created', 200)
+            ->header('Content-Type', 'application/json')
+            ->setContent([
+                'message' => 'Created successfully'
+            ]);
     }
 
     public function delete(CreateTaskRequest $request, TaskService $taskService) {

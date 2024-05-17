@@ -2,7 +2,7 @@ import { Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Detail } from '../Detail';
 
-export function Add() {
+export function Add({ token }) {
     const [opened, { open, close }] = useDisclosure(false);
 
     const handleTask = () => {
@@ -26,7 +26,7 @@ export function Add() {
             </div>
 
             {
-                opened && <Detail />
+                opened && <Detail token={token} />
             }
         </>
     )

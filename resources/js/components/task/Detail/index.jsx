@@ -6,8 +6,11 @@ import { useForm } from '@mantine/form';
 import { yupResolver } from 'mantine-form-yup-resolver';
 import * as yup from 'yup';
 import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 
-export function Detail() {
+export function Detail({ token }) {
+    const navigate = useNavigate();
     const options = [
         {
             value: 'todo',
@@ -51,7 +54,25 @@ export function Detail() {
             return false;
         }
 
-        
+        setTitleError(null);
+        setStatusError(null);
+        console.log(values.dueDate.toUTCString());
+        axios.post('/api/task/store', {
+            title: values.title,
+            description: values.description,
+            status: values.status,
+            dueDate: `${values.dueDate.getFullYear()}-${values.dueDate.getDay()}-${values.dueDate.getMonth()}`,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: 'application/json',
+            }
+        }).then(r => {
+            if(r.status === 200) {
+                navigate(0);
+            }
+        });
+
     }
 
     return (
@@ -100,7 +121,7 @@ export function Detail() {
                             mb="xs"
                             key={form.key('description')}
                             value={form.values.description}
-                            onChange={(event) => form.setFieldValue('description', event.currentTarget.description)}
+                            onChange={(event) => form.setFieldValue('description', event.currentTarget.value)}
                         />
                     </Grid.Col>
                 </Grid>

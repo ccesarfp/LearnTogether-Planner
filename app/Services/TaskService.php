@@ -15,8 +15,15 @@ class TaskService {
                     ->get();
     }
 
-    public function store(array $taskData) {
-        dd($taskData);
+    public function store(array $taskData): Task {
+        return (new Task)
+                    ->create([
+                        'user_id' => $taskData['user_id'],
+                        'title' => $taskData['title'],
+                        'description' => $taskData['description'],
+                        'status' => $taskData['status'],
+                        'due_date' => $taskData['dueDate']
+                    ]);
     }
 
 }

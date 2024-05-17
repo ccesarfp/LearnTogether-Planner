@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
     import { TaskBoard } from './styles.js';
 
-export function Board({ token    }) {
+export function Board({ token }) {
     const navigate = useNavigate();
     const [tasks, setTasks] = useState(null);
 
