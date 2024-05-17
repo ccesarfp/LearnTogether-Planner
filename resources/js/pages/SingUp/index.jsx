@@ -6,7 +6,7 @@ import { GoBack } from '../../components/form/GoBack/index.jsx';
 import { Filled } from '../../components/layout/Filled';
 import axios from 'axios';
 import { encrypt } from '../../utils/PasswordEncrypt.js';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setCookie } from '../../utils/Cookies.js';
 
 export function SingUp() {

@@ -19,4 +19,7 @@ export const TaskBefore = styled.div`
         transform: scale(1.03);
         font-weight: bold;
     }
+
+
+
 `;
