@@ -56,12 +56,14 @@ export function Detail({ token }) {
 
         setTitleError(null);
         setStatusError(null);
-        console.log(values.dueDate.toUTCString());
+
+        console.log(values.status);
+        //return false;
         axios.post('/api/task/store', {
             title: values.title,
             description: values.description,
             status: values.status,
-            dueDate: `${values.dueDate.getFullYear()}-${values.dueDate.getDay()}-${values.dueDate.getMonth()}`,
+            dueDate: values.dueDate ? `${values.dueDate.getFullYear()}-${values.dueDate.getDay()}-${values.dueDate.getMonth()}` : null,
         }, {
             headers: {
                 Authorization: `Bearer ${token}`,

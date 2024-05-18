@@ -19,7 +19,9 @@ export const TaskBefore = styled.div`
         transform: scale(1.03);
         font-weight: bold;
     }
+`;
 
-
-
+export const DateText = styled.span`
+    margin-left: 5px;
+    font-size: 0.75em;
 `;
