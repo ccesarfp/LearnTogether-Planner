@@ -5,11 +5,12 @@ import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { yupResolver } from 'mantine-form-yup-resolver';
 import * as yup from 'yup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { getCookie } from '../../../utils/Cookies.js';
 
-export function Detail({ token }) {
+export function Detail({ task }) {
     const navigate = useNavigate();
     const options = [
         {
@@ -34,6 +35,7 @@ export function Detail({ token }) {
     });
     const form = useForm({
         initialValues: {
+            id: '',
             title: '',
             description: '',
             dueDate: '',
@@ -43,6 +45,14 @@ export function Detail({ token }) {
     });
     const [titleError, setTitleError] = useState(null);
     const [statusError, setStatusError] = useState(null);
+
+    useEffect(() => {
+        form.setFieldValue('id', task.id)
+        form.setFieldValue('title', task.title)
+        form.setFieldValue('description', task.description)
+        form.setFieldValue('status', task.status)
+        form.setFieldValue('dueDate', task.due_date ? new Date(task.due_date) : null)
+    }, []);
 
     const handleForm = () => {
         form.validate();
@@ -56,17 +66,15 @@ export function Detail({ token }) {
 
         setTitleError(null);
         setStatusError(null);
-
-        console.log(values.status);
-        //return false;
         axios.post('/api/task/store', {
+            id: values.id,
             title: values.title,
             description: values.description,
             status: values.status,
             dueDate: values.dueDate ? `${values.dueDate.getFullYear()}-${values.dueDate.getDay()}-${values.dueDate.getMonth()}` : null,
         }, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${getCookie('token')}`,
                 Accept: 'application/json',
             }
         }).then(r => {
@@ -78,8 +86,16 @@ export function Detail({ token }) {
     }
 
     return (
-        <Container>
+        <Container
+            className={"detail"}
+        >
             <Box>
+                <TextInput
+                    style={{contentVisibility: 'hidden'}}
+                    disabled
+                    key={form.key('id')}
+                    value={form.values.id}
+                />
                 <Grid>
                     <Grid.Col span={8}>
                         <TextInput

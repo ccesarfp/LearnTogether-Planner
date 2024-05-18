@@ -17,13 +17,18 @@ class TaskService {
 
     public function store(array $taskData): Task {
         return (new Task)
-                    ->create([
-                        'user_id' => $taskData['user_id'],
-                        'title' => $taskData['title'],
-                        'description' => $taskData['description'],
-                        'status' => $taskData['status'],
-                        'due_date' => $taskData['dueDate']
-                    ]);
+            ->updateOrCreate(
+                [
+                    'id' => $taskData['id'] ?: null
+                ],
+                [
+                    'user_id' => $taskData['user_id'],
+                    'title' => $taskData['title'],
+                    'description' => $taskData['description'],
+                    'status' => $taskData['status'],
+                    'due_date' => $taskData['dueDate']
+                ]
+            );
     }
 
 }

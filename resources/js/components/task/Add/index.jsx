@@ -26,7 +26,7 @@ export function Add({ token }) {
             </div>
 
             {
-                opened && <Detail token={token} />
+                opened && <Detail />
             }
         </>
     )
