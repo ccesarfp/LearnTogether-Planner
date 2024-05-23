@@ -12,6 +12,7 @@ export const TaskBefore = styled.div`
         padding: 5px;
         border-radius: 5px;
         transition: transform .2s;
+        cursor: pointer;
     }
 
     &:hover {
@@ -24,4 +25,15 @@ export const TaskBefore = styled.div`
 export const DateText = styled.span`
     margin-left: 5px;
     font-size: 0.75em;
+`;
+
+export const Close = styled.button`
+    float: right;
+    border: 1px solid #1a202c;
+    padding: 1px 10px;
+    border-radius: 50px;
+
+    &:hover {
+        background: #A61E4D;
+    }
 `;

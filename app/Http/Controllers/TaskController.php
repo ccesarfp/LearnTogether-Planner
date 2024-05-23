@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\DeleteTask;
 use App\Models\Task;
 use App\Models\User;
 use App\Services\TaskService;
@@ -32,7 +33,20 @@ class TaskController
             ]);
     }
 
-    public function delete(CreateTaskRequest $request, TaskService $taskService) {
-        dd($request);
+    public function delete(DeleteTask $request, TaskService $taskService): Response {
+        $haveDeleted = $taskService->delete($request->validated()['id']);
+        if (!$haveDeleted) {
+            return response('Task created', 400)
+                ->header('Content-Type', 'application/json')
+                ->setContent([
+                    'message' => 'Created successfully'
+                ]);
+        }
+
+        return response('Task deleted', 200)
+            ->header('Content-Type', 'application/json')
+            ->setContent([
+                'message' => 'Task deleted'
+            ]);
     }
 }

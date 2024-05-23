@@ -31,4 +31,10 @@ class TaskService {
             );
     }
 
+    public function delete(int $id): bool {
+        return (new Task)
+                ->where('id', $id)
+                ->delete();
+    }
+
 }

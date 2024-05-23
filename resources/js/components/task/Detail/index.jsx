@@ -49,7 +49,7 @@ export function Detail({ task }) {
     useEffect(() => {
         form.setFieldValue('id', task.id)
         form.setFieldValue('title', task.title)
-        form.setFieldValue('description', task.description)
+        form.setFieldValue('description', task.description ? task.description : '')
         form.setFieldValue('status', task.status)
         form.setFieldValue('dueDate', task.due_date ? new Date(task.due_date) : null)
     }, []);
