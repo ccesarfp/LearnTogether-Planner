@@ -6,15 +6,16 @@ import routes from './routes.jsx';
 import '@mantine/core/styles.css';
 import '@mantine/nprogress/styles.css';
 import '@mantine/notifications/styles.css';
-import { createTheme, MantineProvider } from '@mantine/core';
+import '@mantine/dates/styles.css';
+import { createTheme, MantineProvider, useMantineTheme } from '@mantine/core';
 
-const theme = createTheme({
-    /** Put your mantine theme override here */
+const themeCustom = createTheme({
+    primaryColor: 'red',
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <MantineProvider theme={theme}>
+    <MantineProvider theme={themeCustom}>
         <GlobalStyle />
         <RouterProvider router={routes} />
     </MantineProvider>

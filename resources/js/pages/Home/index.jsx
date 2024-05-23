@@ -3,7 +3,7 @@ import { Filled } from '../../components/layout/Filled';
 import Link from '../../components/Link';
 
 export function Home() {
-    const color = "pink";
+    const color = "dark.7";
 
     return (
         <Filled

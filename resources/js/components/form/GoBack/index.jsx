@@ -4,11 +4,11 @@ export function GoBack() {
     return (
         <Button
             className={"mb-3"}
-            color="pink"
+            color="dark.7"
             variant="outline"
         >
             <Anchor
-                c="pink"
+                c="dark.7"
                 href="/"
                 underline="never"
             >
